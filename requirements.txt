@@ -1,0 +1,4 @@
+Run the following in the terminal:
+pip install pygame
+pip install numpy
+pip install numba
