@@ -3,7 +3,7 @@ import pygame.gfxdraw
 from matrix_functions import *
 from numba import njit
 
- 
+
 @njit(fastmath=True)
 def any_func(arr, a, b):
     return np.any((arr == a) | (arr == b))
