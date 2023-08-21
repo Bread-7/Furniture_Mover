@@ -28,6 +28,7 @@ class Object3D:
         Bottom Face: 5
         """
 
+
         self.center = np.array([
             (self.vertices[0][0] + self.vertices[6][0]) / 2, 
             (self.vertices[0][1] + self.vertices[6][1]) / 2, 
