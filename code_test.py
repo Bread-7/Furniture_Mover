@@ -1,85 +1,3 @@
-"""
-from sympy import Point3D, Line3D, Plane
-import math
-import numpy as np
-
-x_theta = y_theta = z_theta = 0
-print(x_theta, y_theta, z_theta)
-
-print(-5 % -2)
-
-t = -15 * math.pi / 16
-t = math.tan(t)
-t = math.atan(t)
-print(t / math.pi)
-
-a = None
-a = np.array([1, 2])
-print(a)
-# class Face_Intersect:
-    # def __init__(self, )
-
-# def 
-
-m1 = np.array([2, 1, 3, 4])
-# for i in range(j = 3, step = 2):
-#     print(m1[i])
-m1[[0, 2]] = m1[[2, 0]]
-print(m1 - 1)
-m2 = np.array([[7, 5], [6, 8]])
-m2[0] = [1, 2]
-# m3 = m1 @ m2
-print(m2)
-
-vertices = np.array([
-    (-50, -50, -50, 1), (-50, 50, -50, 1), # Vertices 0, 1
-    (50, 50, -50, 1), (50, -50, -50, 1), # Vertices 2, 3
-    (-50, -50, 50, 1), (-50, 50, 50, 1), # Vertices 4, 5
-    (50, 50, 50, 1), (50, -50, 50, 1) # Vertices 6, 7
-])
-
-z_vertices = np.array([vertex[2] for vertex in vertices])
-print(max(z_vertices))
-
-
-faces = np.array([
-    (0, 1, 2, 3), (4, 5, 6, 7), # Faces 0, 1
-    (0, 4, 5, 1), (2, 3, 7, 6), # Faces 2, 3
-    (1, 2, 6, 5), (0, 3, 7, 4) # Faces 4, 5
-])
-
-vertex_faces = np.zeros(shape = (6, 4, 3))
-
-for i in range(len(faces)):
-    for x in range(len(faces[i])):
-        vertex_faces[i][x] = vertices[faces[i][x]][:3]
-        # print(type(vertices[faces[i][x]]))
-
-print(vertex_faces)
-
-opposite_vertices = np.array([
-    (0, 6), (6, 0), (1, 7), (7, 1),
-    (2, 4), (4, 2), (3, 5), (5, 3)
-])
-
-
-a = Plane(Point3D(1, 2, 3), normal_vector=(1, 1, 1))
-b = Point3D(0, 0, 0)
-pt = Point3D(1, 1, 1)
-print(list((b + pt)/2))
-# print(a.intersection(b))
-c = Line3D(Point3D(1, 4, 7), Point3D(2, 2, 2))
-pt = a.intersection(c)
-d = Plane(Point3D(6, 0, 0), normal_vector=(2, -5, 3))
-e = Plane(Point3D(2, 0, 0), normal_vector=(3, 4, -3))
-print(d.intersection(e))
-pt = np.asarray(pt)
-print(pt, pt.shape)
-
-# List of all faces with vertices
-
-"""
-
 from collections import Counter
 import numpy as np
 
@@ -211,4 +129,86 @@ if not invisible:
   v_z = dist * np.sin(z_theta)
   if v_z <= np.abs(vertices[0][1]) and h_z <= np.abs(vertices[0][0]):
     invisible = True
+"""
+
+"""
+from sympy import Point3D, Line3D, Plane
+import math
+import numpy as np
+
+x_theta = y_theta = z_theta = 0
+print(x_theta, y_theta, z_theta)
+
+print(-5 % -2)
+
+t = -15 * math.pi / 16
+t = math.tan(t)
+t = math.atan(t)
+print(t / math.pi)
+
+a = None
+a = np.array([1, 2])
+print(a)
+# class Face_Intersect:
+    # def __init__(self, )
+
+# def 
+
+m1 = np.array([2, 1, 3, 4])
+# for i in range(j = 3, step = 2):
+#     print(m1[i])
+m1[[0, 2]] = m1[[2, 0]]
+print(m1 - 1)
+m2 = np.array([[7, 5], [6, 8]])
+m2[0] = [1, 2]
+# m3 = m1 @ m2
+print(m2)
+
+vertices = np.array([
+    (-50, -50, -50, 1), (-50, 50, -50, 1), # Vertices 0, 1
+    (50, 50, -50, 1), (50, -50, -50, 1), # Vertices 2, 3
+    (-50, -50, 50, 1), (-50, 50, 50, 1), # Vertices 4, 5
+    (50, 50, 50, 1), (50, -50, 50, 1) # Vertices 6, 7
+])
+
+z_vertices = np.array([vertex[2] for vertex in vertices])
+print(max(z_vertices))
+
+
+faces = np.array([
+    (0, 1, 2, 3), (4, 5, 6, 7), # Faces 0, 1
+    (0, 4, 5, 1), (2, 3, 7, 6), # Faces 2, 3
+    (1, 2, 6, 5), (0, 3, 7, 4) # Faces 4, 5
+])
+
+vertex_faces = np.zeros(shape = (6, 4, 3))
+
+for i in range(len(faces)):
+    for x in range(len(faces[i])):
+        vertex_faces[i][x] = vertices[faces[i][x]][:3]
+        # print(type(vertices[faces[i][x]]))
+
+print(vertex_faces)
+
+opposite_vertices = np.array([
+    (0, 6), (6, 0), (1, 7), (7, 1),
+    (2, 4), (4, 2), (3, 5), (5, 3)
+])
+
+
+a = Plane(Point3D(1, 2, 3), normal_vector=(1, 1, 1))
+b = Point3D(0, 0, 0)
+pt = Point3D(1, 1, 1)
+print(list((b + pt)/2))
+# print(a.intersection(b))
+c = Line3D(Point3D(1, 4, 7), Point3D(2, 2, 2))
+pt = a.intersection(c)
+d = Plane(Point3D(6, 0, 0), normal_vector=(2, -5, 3))
+e = Plane(Point3D(2, 0, 0), normal_vector=(3, 4, -3))
+print(d.intersection(e))
+pt = np.asarray(pt)
+print(pt, pt.shape)
+
+# List of all faces with vertices
+
 """
