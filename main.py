@@ -42,9 +42,6 @@ class SoftwareRender:
         #     (2, 2, 21, 1), (2, -2, 21, 1) # Vertices 6, 7
         # ]))
 
-        # self.object.rotate_y_obj(math.pi/4 + self.object.h_rad_to_center)
-        # self.object.rotate_z_obj(math.pi)
-
         # self.axes = Axes(self)
         # self.axes.translate_obj([0.7, 0.9, 0.7])
         # self.world_axes = Axes(self)
@@ -52,8 +49,64 @@ class SoftwareRender:
         # self.world_axes.scale_obj(2.5)
         # self.world_axes.translate_obj([0.0001, 0.0001, 0.0001]) 
 
+    def config_key_bindings(self):
+        key = pg.key.get_pressed()
+        if key[pg.K_a]:
+            self.object.translate_obj([-self.moving_speed, 0, 0])
+            self.object1.translate_obj([-self.moving_speed, 0, 0])
+        if key[pg.K_d]:
+            self.object.translate_obj([self.moving_speed, 0, 0])
+            self.object1.translate_obj([self.moving_speed, 0, 0])
+        if key[pg.K_w]:
+            self.object.translate_obj([0, 0, -self.moving_speed])
+            self.object1.translate_obj([0, 0, -self.moving_speed])
+        if key[pg.K_s]:
+            self.object.translate_obj([0, 0, self.moving_speed])
+            self.object1.translate_obj([0, 0, self.moving_speed])
+        if key[pg.K_q]:
+            self.object.translate_obj([0, self.moving_speed, 0])
+            self.object1.translate_obj([0, self.moving_speed, 0])
+        if key[pg.K_e]:
+            self.object.translate_obj([0, -self.moving_speed, 0])
+            self.object1.translate_obj([0, -self.moving_speed, 0])
+
+        if key[pg.K_LEFT]:
+            self.object.rotate_y_obj(self.rotating_speed)
+            self.object1.rotate_y_obj(self.rotating_speed)
+            
+        if key[pg.K_RIGHT]:
+            self.object.rotate_y_obj(-self.rotating_speed)
+            self.object1.rotate_y_obj(-self.rotating_speed)
+            
+        if key[pg.K_UP]:
+            self.object.rotate_x_obj(self.rotating_speed)
+            self.object1.rotate_x_obj(self.rotating_speed)
+            
+        if key[pg.K_DOWN]:
+            self.object.rotate_x_obj(-self.rotating_speed)
+            self.object1.rotate_x_obj(-self.rotating_speed)
+            
+        if key[pg.K_8]:
+            self.object.rotate_z_obj(self.rotating_speed)
+            self.object1.rotate_z_obj(self.rotating_speed)
+            
+        if key[pg.K_9]:
+            self.object.rotate_z_obj(-self.rotating_speed)
+            self.object1.rotate_z_obj(-self.rotating_speed)
+
+        if key[pg.K_h]:
+            self.camera.position += self.camera.up * self.camera.moving_speed
+
+        if key[pg.K_g]:
+            self.camera.position -= self.camera.up * self.camera.moving_speed
+
     def draw(self):
         self.screen.fill(pg.Color('darkslategray'))
+        if (self.object1.h_v_rad_to_center[2] == 1.0 or \
+            self.object1.h_v_rad_to_center[3] == 1.0) and \
+            math.fabs(self.object1.h_v_rad_to_center[0]) <= self.camera.h_fov / 2 and \
+            math.fabs(self.object1.h_v_rad_to_center[1]) <= self.camera.v_fov / 2:
+            self.object1.draw(self.camera.position)
         
         if (self.object.h_v_rad_to_center[2] == 1.0 or \
             self.object.h_v_rad_to_center[3] == 1.0) and \
@@ -61,77 +114,23 @@ class SoftwareRender:
             np.abs(self.object.h_v_rad_to_center[1]) <= self.camera.v_fov / 2:
             self.object.draw(self.camera.position)
 
-        # if (self.object1.h_v_rad_to_center[2] == 1.0 or \
-            # self.object1.h_v_rad_to_center[3] == 1.0) and \
-            # math.fabs(self.object1.h_v_rad_to_center[0]) <= self.camera.h_fov / 2 and \
-            # math.fabs(self.object1.h_v_rad_to_center[1]) <= self.camera.v_fov / 2:
-            # self.object1.draw(self.camera.position)
-        
-        print('invisible pts', self.object.invisible_pts)
-
 
     def run(self):
         while True:
             self.draw()
-            # self.camera.control()
+            self.config_key_bindings()
             [exit() for i in  pg.event.get() if i.type == pg.QUIT]
             pg.display.set_caption(str(self.clock.get_fps()))
             pg.display.flip()
             self.clock.tick(self.FPS)
-            key = pg.key.get_pressed()
-            if key[pg.K_a]:
-                self.object.translate_obj([-self.moving_speed, 0, 0])
-                # self.object1.translate_obj([-self.moving_speed, 0, 0])
-            if key[pg.K_d]:
-                self.object.translate_obj([self.moving_speed, 0, 0])
-                # self.object1.translate_obj([self.moving_speed, 0, 0])
-            if key[pg.K_w]:
-                self.object.translate_obj([0, 0, -self.moving_speed])
-                # self.object1.translate_obj([0, 0, -self.moving_speed])
-            if key[pg.K_s]:
-                self.object.translate_obj([0, 0, self.moving_speed])
-                # self.object1.translate_obj([0, 0, self.moving_speed])
-            if key[pg.K_q]:
-                self.object.translate_obj([0, self.moving_speed, 0])
-                # self.object1.translate_obj([0, self.moving_speed, 0])
-            if key[pg.K_e]:
-                self.object.translate_obj([0, -self.moving_speed, 0])
-                # self.object1.translate_obj([0, -self.moving_speed, 0])
-
-            if key[pg.K_LEFT]:
-                self.object.rotate_y_obj(self.rotating_speed)
-                # self.object1.rotate_y_obj(self.rotating_speed)
-                
-            if key[pg.K_RIGHT]:
-                self.object.rotate_y_obj(-self.rotating_speed)
-                # self.object1.rotate_y_obj(-self.rotating_speed)
-
-            if key[pg.K_h]:
-                self.camera.position += self.camera.up * self.camera.moving_speed
-            if key[pg.K_g]:
-                self.camera.position -= self.camera.up * self.camera.moving_speed
-                
-            if key[pg.K_UP]:
-                self.object.rotate_x_obj(self.rotating_speed)
-                # self.object1.rotate_x_obj(self.rotating_speed)
-                
-            if key[pg.K_DOWN]:
-                self.object.rotate_x_obj(-self.rotating_speed)
-                # self.object1.rotate_x_obj(-self.rotating_speed)
-                
-            if key[pg.K_8]:
-                self.object.rotate_z_obj(self.rotating_speed)
-                # self.object1.rotate_z_obj(self.rotating_speed)
-                
-            if key[pg.K_9]:
-                self.object.rotate_z_obj(-self.rotating_speed)
-                # self.object1.rotate_z_obj(-self.rotating_speed)
+            
                 
             # self.camera.position /= self.camera.position[3]
             # print('pos', self.camera.position)
             # print('forward', self.camera.forward)
             # print('up', self.camera.up)
             # print('right', self.camera.right)
+
 
 if __name__ == '__main__':
     app = SoftwareRender()

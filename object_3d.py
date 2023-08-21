@@ -13,7 +13,7 @@ class Object3D:
             (0, 1, 2, 3), (4, 5, 6, 7), # Faces 0, 1
             (1, 2, 6, 5), (0, 3, 7, 4) # Faces 4, 5
         ])
-        
+
         self.visible_pts = np.array([])
 
         """
@@ -65,10 +65,10 @@ class Object3D:
         self.visible_pts = visible_faces[0]
         self.visible_pts_indices = visible_faces[1]
 
-        for index, face in enumerate(self.visible_pts): 
+        for index, face in enumerate(visible_faces[0]): 
             polygon = vertices[face]
             if ((not np.any((polygon == self.render.H_WIDTH) | (polygon == self.render.H_HEIGHT)))):
-                pygame.gfxdraw.filled_polygon(self.render.screen, polygon, face_colors[self.visible_pts_indices[index]])
+                pygame.gfxdraw.filled_polygon(self.render.screen, polygon, face_colors[visible_faces[1][index]])
     
     def back_face_culling(self, cam_pos):
         visible_faces = np.array([])
@@ -342,3 +342,4 @@ def plane_3D_to_2D(self, cam_pos):
     invisible_pts = np.reshape(invisible_pts, (-1, 4))
     return invisible_pts
 """
+# Line 345
