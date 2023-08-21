@@ -34,7 +34,6 @@ class SoftwareRender:
             (6, 4, 6 + 15, 1), (6, 2 - 2, 6 + 15, 1) # Vertices 6, 7
         ]))
 
-
         # Cube
         # self.object = Object3D(self, vertices_arr = np.array([
         #     (-2, -2, 17, 1), (-2, 2, 17, 1), # Vertices 0, 1
